@@ -1,0 +1,21 @@
+{
+    "name": "hairmare/SmsSender-Swisscom-Provider",
+    "description": "Provider for using developer.swisscom.com with Carpe-Hora/SmsSender.",
+    "keywords": ["sms"],
+    "autoload": {
+        "psr-0": { "": "src/", "SmsSender": "vendor/Carpe-Hora/SmsSender/tests" }
+    },
+    "require": {
+        "Carpe-Hora/SmsSender": "@dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lucas Bickel",
+            "email": "hairmare@purplehaze.ch"
+        }
+    ]
+}
