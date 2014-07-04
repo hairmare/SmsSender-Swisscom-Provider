@@ -11,7 +11,7 @@ class SwisscomProvider extends AbstractProvider
     /**
      * @var string
      */
-    const SEND_SMS_URL = 'https://api.swisscom.com/v1/messaging/sms/outbound/tel:%s/requests';
+    const SEND_SMS_URL = 'https://api.swisscom.com/v1/messaging/sms/outbound/tel%s/requests';
 
     /**
      * {@inheritDoc}
@@ -77,18 +77,25 @@ class SwisscomProvider extends AbstractProvider
     protected function executeQuery($url, array $data = array(), array $extra_result_data = array())
     {
         $headers = array(
-            'client_id' => $this->client_id,
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json'
+            'client_id: '.$this->client_id,
+            'Content-Type: application/json',
+            'Accept: application/json'
         );
-            
-        $content = $this->getAdapter()->getContent($url, 'POST', $headers = array(), $data);
+        $request = new \stdClass;
+        $request->outboundSMSMessageRequest = new \stdClass;
+        $request->outboundSMSMessageRequest->address = array( sprintf('tel:%s', $data['to']) );
+        $request->outboundSMSMessageRequest->senderAddress = sprintf('tel:%s', $data['from']);
+        $request->outboundSMSMessageRequest->outboundSMSTextMessage = new \stdClass;
+        $request->outboundSMSMessageRequest->outboundSMSTextMessage->message = $data['text'];
+
+                
+        $content = $this->getAdapter()->getContent($url, 'POST', $headers, array(json_encode($request)));
 
         if (null == $content) {
             $results = $this->getDefaults();
         }
         if (is_string($content)) {
-            $content = json_decode($content, true);
+                $content = json_decode($content, true);
             $results['id'] = $content['outboundSMSMessageRequest']['clientCorrelator'];
             switch ($content['outboundSMSMessageRequest']['deliveryInfoList']['deliveryInfo'][0]['deliveryStatus']) {
                 case 'DeliveredToNetwork':

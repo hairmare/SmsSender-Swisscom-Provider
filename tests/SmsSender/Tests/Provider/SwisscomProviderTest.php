@@ -88,8 +88,8 @@ EOF;
     }
 
     /**
-* @dataProvider validRecipientProvider
-*/
+     * @dataProvider validRecipientProvider
+     */
     public function testSendCleansRecipientNumber($recipient, $expectedRecipient, $internationalPrefix = null)
     {
         // setup the adapter
@@ -102,7 +102,9 @@ EOF;
                 $this->equalTo('POST'), // method
                 $this->anything(), // headers
                 $this->callback(function ($data) use ($expectedRecipient) {
-                    return !empty($data['to']) && $data['to'] === $expectedRecipient;
+                    $data = json_decode($data[0], true);
+                    $to = array_pop(explode(':', $data['outboundSMSMessageRequest']['address'][0]));
+                    return $to === $expectedRecipient;
                 })
             );
 
