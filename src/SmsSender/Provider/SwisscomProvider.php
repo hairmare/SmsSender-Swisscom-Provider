@@ -87,9 +87,8 @@ class SwisscomProvider extends AbstractProvider
         $request->outboundSMSMessageRequest->senderAddress = sprintf('tel:%s', $data['from']);
         $request->outboundSMSMessageRequest->outboundSMSTextMessage = new \stdClass;
         $request->outboundSMSMessageRequest->outboundSMSTextMessage->message = $data['text'];
-
                 
-        $content = $this->getAdapter()->getContent($url, 'POST', $headers, array(json_encode($request)));
+        $content = $this->getAdapter()->getContent($url, 'POST', $headers, json_encode($request));
 
         if (null == $content) {
             $results = $this->getDefaults();
