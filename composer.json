@@ -3,7 +3,10 @@
     "description": "Provider for using developer.swisscom.com with Carpe-Hora/SmsSender.",
     "keywords": ["sms"],
     "autoload": {
-        "psr-0": { "": "src/", "SmsSender": "vendor/Carpe-Hora/SmsSender/tests" }
+        "psr-0": { "": "src/"}
+    },
+    "autoload-dev": {
+        "psr-0": {"SmsSender": "vendor/Carpe-Hora/SmsSender/tests" }
     },
     "require": {
         "Carpe-Hora/SmsSender": "@dev"
