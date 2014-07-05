@@ -1,5 +1,5 @@
 
-# SwisscomProvider for [SendSMS](https://github.com/Carpe-Hora/SmsSender)
+# SwisscomProvider for [SmsSender](https://github.com/Carpe-Hora/SmsSender)
 
 Send SMS using the [SMS Messaging API](https://developer.swisscom.com/documentation/api/sms-messaging-api) from [developer.swisscom.com](http://developer.swisscom.com).
 
