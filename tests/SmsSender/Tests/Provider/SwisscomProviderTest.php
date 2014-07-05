@@ -102,7 +102,7 @@ EOF;
                 $this->equalTo('POST'), // method
                 $this->anything(), // headers
                 $this->callback(function ($data) use ($expectedRecipient) {
-                    $data = json_decode($data[0], true);
+                    $data = json_decode($data, true);
                     $to = array_pop(explode(':', $data['outboundSMSMessageRequest']['address'][0]));
                     return $to === $expectedRecipient;
                 })

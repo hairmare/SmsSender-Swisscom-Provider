@@ -16,8 +16,8 @@ class SwisscomProvider extends AbstractProvider
     /**
      * {@inheritDoc}
      *
-     * @param object $adapter   adapter
-     * @param string $client_id            API client id (probably the api secret from developer.swisscom.com)
+     * @param object $adapter              adapter
+     * @param string $client_id            API-key from developer.swisscom.com
      * @param string $international_prefix international prefix
      *
      * @return SwisscomProvider
@@ -94,7 +94,7 @@ class SwisscomProvider extends AbstractProvider
             $results = $this->getDefaults();
         }
         if (is_string($content)) {
-                $content = json_decode($content, true);
+            $content = json_decode($content, true);
             $results['id'] = $content['outboundSMSMessageRequest']['clientCorrelator'];
             switch ($content['outboundSMSMessageRequest']['deliveryInfoList']['deliveryInfo'][0]['deliveryStatus']) {
                 case 'DeliveredToNetwork':
@@ -109,3 +109,5 @@ class SwisscomProvider extends AbstractProvider
         return array_merge($results, $extra_result_data);
     }
 }
+
+// vim: set softtabstop=4 tabstop=4 shiftwidth=4 autoindent:
