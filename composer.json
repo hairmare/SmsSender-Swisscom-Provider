@@ -8,8 +8,14 @@
     "autoload-dev": {
         "psr-0": {"SmsSender": "vendor/Carpe-Hora/SmsSender/tests" }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/hairmare/SmsSender"
+        }
+    ],
     "require": {
-        "Carpe-Hora/SmsSender": "@dev"
+        "Carpe-Hora/SmsSender": "dev-feature/post-contents"
     },
     "require-dev": {
         "phpunit/phpunit": "*"
